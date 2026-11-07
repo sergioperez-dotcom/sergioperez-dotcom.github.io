@@ -603,9 +603,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
         <div class="viewer">
           <button class="main-shot" type="button" aria-label="Ver imagen completa"><img src="assets/img/saf-dashboard.jpg" alt=""></button>
           <p class="cap"></p>
-          <div class="thumbs two" role="group" aria-label="Imágenes del proyecto">
+          <div class="thumbs" role="group" aria-label="Imágenes del proyecto">
             <button type="button" aria-pressed="true" data-src="assets/img/saf-dashboard.jpg" data-cap="Dashboard anual en Excel: ventas, costos, utilidad operativa, producción y costeo por insumo."><img src="assets/img/saf-dashboard.jpg" alt="Dashboard financiero de la panificadora"></button>
             <button type="button" aria-pressed="false" data-src="assets/img/saf-equilibrio.jpg" data-cap="Punto de equilibrio mensual por canal, con costo unitario por producto."><img src="assets/img/saf-equilibrio.jpg" alt="Tablero de punto de equilibrio"></button>
+            <button type="button" aria-pressed="false" data-src="assets/img/modelacion-escenarios.jpg" data-cap="Pronóstico SARIMAX del índice de búsquedas de “atole” hasta 2029; la banda de 95% define los escenarios pesimista y optimista."><img src="assets/img/modelacion-escenarios.jpg" alt="Pronóstico SARIMAX con banda de escenarios"></button>
+            <button type="button" aria-pressed="false" data-src="assets/img/modelacion-flujos.jpg" data-cap="Ingresos netos de IVA y egresos operativos mensuales 2027–2029 en escenarios base, optimista y pesimista."><img src="assets/img/modelacion-flujos.jpg" alt="Ingresos y egresos mensuales por escenario"></button>
           </div>
         </div>
         <div class="proj-txt">
@@ -621,6 +623,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
             <li>Costo unitario por producto a partir de los gramos de cada insumo y la recontribución de merma.</li>
             <li>Punto de equilibrio en piezas y en pesos por producto y canal, con margen de contribución ponderado.</li>
             <li>Forecast por canal con ARIMA, SARIMA y SARIMAX, revisando estacionalidad, tendencia y ruido blanco.</li>
+            <li>Escenarios base, optimista y pesimista de ingresos y egresos hasta 2029, a partir de la banda de 95% de un SARIMAX con datos de Google Trends.</li>
           </ul>
           <div class="proj-foot">
             <span class="lbl">Herramientas</span>
