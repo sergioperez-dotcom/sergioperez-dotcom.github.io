@@ -203,6 +203,13 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .thumbs button img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
 .thumbs button[aria-pressed="true"]{opacity:1;border-color:var(--azul);box-shadow:0 0 0 1px var(--azul)}
 .thumbs button:hover{opacity:1}
+.mini-q{margin:10px 0 0;padding-top:20px;border-top:1px solid var(--borde);display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:8px}
+.mini-q::before{content:"\201C";font-family:var(--f-display);font-weight:800;font-size:3.4rem;line-height:.75;color:var(--azul);grid-row:span 2}
+.mini-q blockquote{margin:0}
+.mini-q p{margin:0;font-family:var(--f-display);font-weight:600;font-size:1.15rem;line-height:1.4;color:var(--hielo);text-wrap:balance}
+.mini-q figcaption{font-size:13px;line-height:1.45;color:var(--plata)}
+.mini-q figcaption b{font-family:var(--f-display);font-weight:600;color:var(--hielo)}
+.mini-q cite{font-style:italic}
 .proj-txt{padding:36px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .course{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul)}
 .proj-txt p{margin:0;font-size:15px}
@@ -508,6 +515,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
             <button type="button" aria-pressed="false" data-src="assets/img/nnarx-trends.jpg" data-cap="Ventas semanales contra búsquedas de Google Trends de “atole” y “frío”."><img src="assets/img/nnarx-trends.jpg" alt="Ventas contra Google Trends"></button>
             <button type="button" aria-pressed="false" data-src="assets/img/nnarx-arquitectura.jpg" data-cap="Arquitectura de la red: 14 entradas, 3 neuronas logísticas y salida lineal."><img src="assets/img/nnarx-arquitectura.jpg" alt="Arquitectura de la red neuronal"></button>
           </div>
+          <figure class="mini-q">
+            <blockquote><p>En esencia, todos los modelos están equivocados, pero algunos son útiles.</p></blockquote>
+            <figcaption><b>George E. P. Box</b> · <cite>Empirical Model-Building and Response Surfaces</cite>, 1987</figcaption>
+          </figure>
         </div>
         <div class="proj-txt">
           <span class="course">Software Aplicado a las Finanzas · CUCEA</span>
