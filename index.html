@@ -255,6 +255,10 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
 .contact h2{font-size:clamp(2rem,4.4vw,3.3rem)}
 .contact p{margin:20px 0 0;max-width:46ch}
+.eyebrow.open b{background:#6FD39A;box-shadow:0 0 0 4px rgba(111,211,154,.18),0 0 10px #6FD39A;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(111,211,154,0),0 0 10px #6FD39A}}
+.open-tags{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.open-tags li{padding:7px 14px;border-radius:999px;border:1px solid var(--borde);background:var(--vidrio);font-size:13.5px;font-weight:600;color:var(--hielo)}
 .rows{border-radius:20px;border:1px solid var(--borde);background:var(--pizarra);overflow:hidden}
 .row{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 20px;border-top:1px solid var(--borde)}
 .row:first-child{border-top:0}
@@ -683,9 +687,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   <section class="contact" id="contacto">
     <div class="wrap contact-grid">
       <div>
-        <span class="eyebrow"><b></b>Contacto</span>
-        <h2 style="margin-top:18px">¿Buscas un analista? <span class="hl">Hablemos.</span></h2>
-        <p>Busco roles de Analista Financiero, Analista de Negocios / BI o Data Analytics en Guadalajara y su zona metropolitana. Respondo en español o inglés.</p>
+        <span class="eyebrow open"><b></b>Abierto a oportunidades</span>
+        <h2 style="margin-top:18px">Listo para mi <span class="hl">siguiente reto.</span></h2>
+        <p>Estoy buscando un puesto de tiempo completo como Analista Financiero, Analista de Negocios / BI o Data Analytics. Si tu equipo necesita a alguien que convierta datos en decisiones, me encantaría platicar.</p>
+        <ul class="open-tags">
+          <li>Tiempo completo</li>
+          <li>Guadalajara y zona metropolitana</li>
+          <li>Español · Inglés B2</li>
+        </ul>
       </div>
       <div class="rows">
         <div class="row"><span class="k">Correo</span><span class="v" id="c-mail">sergio.perez1335@alumnos.udg.mx</span><button class="copy" type="button" data-target="c-mail">Copiar</button></div>
