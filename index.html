@@ -267,6 +267,10 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .contact p{margin:20px 0 0;max-width:46ch}
 .eyebrow.open b{background:#6FD39A;box-shadow:0 0 0 4px rgba(111,211,154,.18),0 0 10px #6FD39A;animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(111,211,154,0),0 0 10px #6FD39A}}
+.cv-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-top:30px}
+.cv-meta{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--plata)}
+.btn.dl svg{transition:transform .25s ease}
+.btn.dl:hover svg{transform:translateY(3px)}
 .open-tags{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .open-tags li{padding:7px 14px;border-radius:999px;border:1px solid var(--borde);background:var(--vidrio);font-size:13.5px;font-weight:600;color:var(--hielo)}
 .contact-side{display:flex;flex-direction:column;gap:16px;min-width:0}
@@ -759,6 +763,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           <li>Guadalajara y zona metropolitana</li>
           <li>Español · Inglés B2</li>
         </ul>
+        <div class="cv-cta">
+          <a class="btn p dl" href="assets/cv/CV_Sergio_Perez_Gonzalez.pdf" download="CV_Sergio_Perez_Gonzalez.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+            Descargar CV</a>
+          <a class="btn" href="assets/cv/CV_Sergio_Perez_Gonzalez.pdf" target="_blank" rel="noopener">Ver en el navegador</a>
+          <span class="cv-meta">PDF · 1 página · 300 KB</span>
+        </div>
       </div>
       <div class="contact-side">
         <div class="rows">
