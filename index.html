@@ -232,8 +232,16 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .stack ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
 .stack li{color:var(--hielo);font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px}
 .stack li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--acero);flex-shrink:0}
-.fx{margin-top:16px;padding:14px 18px;border-radius:14px;background:var(--abismo);border:1px solid var(--borde);font-family:var(--f-mono);font-size:13px;color:var(--plata);overflow-x:auto;white-space:nowrap}
-.fx .f{color:var(--azul)} .fx .q{color:#B9C9DC}
+.ledger{margin-top:16px;padding:26px 28px 14px;border-radius:18px;border:1px solid var(--borde);background:var(--pizarra)}
+.ledger-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px;padding-bottom:12px;border-bottom:1px solid var(--borde)}
+.ledger-h h3{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--azul)}
+.ledger-h span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--plata)}
+.ledger dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:56px;margin:0}
+.ledger dl div{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-bottom:1px solid rgba(38,54,73,.7);min-width:0}
+.ledger dl div:nth-last-child(-n+2){border-bottom:0}
+.ledger dt{color:var(--hielo);font-weight:600;font-size:15px;min-width:0}
+.ledger i{flex:1;min-width:18px;border-bottom:2px dotted var(--acero);opacity:.7;transform:translateY(-5px)}
+.ledger dd{margin:0;font-family:var(--f-mono);font-size:12.5px;color:var(--plata);text-align:right;white-space:nowrap}
 
 /* Formación */
 .edu{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
@@ -367,6 +375,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .viewer{padding:16px}
   .spec{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stack{grid-template-columns:minmax(0,1fr)}
+  .ledger{padding:22px 20px 8px}
+  .ledger dl{grid-template-columns:minmax(0,1fr)}
+  .ledger dl div:nth-last-child(2){border-bottom:1px solid rgba(38,54,73,.7)}
+  .ledger dt{font-size:14px}
+  .ledger dd{font-size:11.5px}
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .k{grid-column:1/-1}
   .marq-track{justify-content:flex-start}
@@ -657,7 +670,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
         <div><h3>Estadística y datos</h3><ul><li>R</li><li>Python</li><li>Stata</li><li>SQL</li></ul></div>
         <div><h3>Sistemas</h3><ul><li>CRM corporativo</li><li>CONTPAQi</li><li>Office 365</li></ul></div>
       </div>
-      <div class="fx" aria-label="Ejemplo de fórmula de Excel"><span class="f">=FILTRAR</span>(tblPrimas, (tblPrimas[Zona]=<span class="q">"Occidente"</span>) * (tblPrimas[Var%]&gt;0))&nbsp;&nbsp;·&nbsp;&nbsp;BUSCARX · INDIRECTO · LET · LAMBDA</div>
+      <div class="ledger">
+        <div class="ledger-h"><h3>Finanzas</h3><span>En la práctica</span></div>
+        <dl>
+          <div><dt>Presupuesto maestro</dt><i></i><dd>Panificadora 2026</dd></div>
+          <div><dt>Punto de equilibrio</dt><i></i><dd>Por producto y canal</dd></div>
+          <div><dt>Margen de contribución</dt><i></i><dd>Ponderado por canal</dd></div>
+          <div><dt>Costeo unitario</dt><i></i><dd>Por insumo</dd></div>
+          <div><dt>Estados financieros</dt><i></i><dd>Vertical y horizontal</dd></div>
+          <div><dt>Razones de apalancamiento</dt><i></i><dd>Grupo México</dd></div>
+          <div><dt>Costo de capital</dt><i></i><dd>WACC · CAPM</dd></div>
+          <div><dt>Seguimiento presupuestal</dt><i></i><dd>MAPFRE</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
@@ -812,7 +837,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     t.classList.add('rv',rev?'l':'r');t.style.setProperty('--d','.28s');
     p.querySelectorAll('.spec > div').forEach(function(c,i){c.classList.add('rv');c.style.setProperty('--d',(.4+i*.07)+'s');});
   });
-  mark('.stack > div','',.1);mark('.fx','',0,.3);
+  mark('.stack > div','',.1);mark('.ledger','',0,.3);
   mark('.edu-main','l');mark('.certs','r',0,.1);
   mark('.contact-grid > div:first-child','l');mark('.rows','r',0,.12);
 
