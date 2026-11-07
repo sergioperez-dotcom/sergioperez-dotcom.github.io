@@ -113,7 +113,8 @@ h3{font-weight:600;font-size:1.3rem;line-height:1.25;letter-spacing:-.01em}
 
 /* ---------- Franja de herramientas ---------- */
 .tools-band{background:var(--marino);border-block:1px solid var(--borde)}
-.tools-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;padding-block:26px}
+.tools-band .wrap{padding-block:26px}
+.marq-track{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px}
 .tools-band span{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:600;font-size:15px;letter-spacing:.06em;color:var(--plata)}
 .tools-band span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--acero)}
 
@@ -289,6 +290,35 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 .hero-txt > *:nth-child(4){animation-delay:.24s}
 .photo{animation:up .9s .15s both}
 
+/* ---------- Movimiento ---------- */
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,var(--azul-hondo),var(--azul));transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.nav{transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 10px 30px -12px rgba(0,0,0,.6)}
+.nav ul a[aria-current="true"]{color:var(--hielo);background:var(--vidrio)}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes float2{50%{transform:translateY(8px)}}
+.orb.a{animation:float 6s ease-in-out infinite}
+.orb.b{animation:float2 7s ease-in-out infinite}
+.chip-g.k{animation:float 6.5s ease-in-out 1s infinite}
+.chip-g.t{animation:float2 7.5s ease-in-out .5s infinite}
+.flow div,.stack > div,.kpi,.stats div,.spec div,.certs div{transition:translate .3s ease,border-color .3s ease,background-color .3s ease}
+.flow div:hover,.stack > div:hover,.kpi:hover,.stats div:hover,.spec div:hover{translate:0 -4px;border-color:var(--acero)}
+.certs div:hover{background-color:rgba(106,157,219,.06)}
+
+/* Aparición al hacer scroll (solo con JS y sin "reducir movimiento") */
+.js-anim .rv{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0s),translate .3s ease,border-color .3s ease,background-color .3s ease}
+.js-anim .rv.l{transform:translateX(-48px)}
+.js-anim .rv.r{transform:translateX(48px)}
+.js-anim .rv.z{transform:translateY(24px) scale(.97)}
+.js-anim .rv.in{opacity:1;transform:none}
+.js-anim .words .w{opacity:.14;transition:opacity .45s ease calc(var(--i) * 55ms)}
+.js-anim .words.in .w{opacity:1}
+.js-anim .marq{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.js-anim .marq-track{flex-wrap:nowrap;justify-content:flex-start;gap:0;width:max-content;animation:marq 34s linear infinite}
+.js-anim .marq-track span{padding-right:56px}
+.js-anim .marq:hover .marq-track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1000px){
   .hero .wrap{grid-template-columns:minmax(0,1fr);gap:64px;padding-block:56px 72px}
@@ -327,7 +357,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .stack{grid-template-columns:minmax(0,1fr)}
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .k{grid-column:1/-1}
-  .tools-band .wrap{justify-content:flex-start}
+  .marq-track{justify-content:flex-start}
   .lb-n{top:auto !important;bottom:max(16px,env(safe-area-inset-bottom,0px))}
   .lb-n.prev{left:calc(50% - 54px)}
   .lb-n.next{right:calc(50% - 54px)}
@@ -353,6 +383,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     </ul>
     <a class="btn p" href="#contacto">Contáctame</a>
   </div>
+  <span class="prog" aria-hidden="true"></span>
 </nav>
 
 <header class="hero" id="inicio">
@@ -383,7 +414,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <div class="frame"><img src="assets/img/sergio.jpg" alt="Sergio Pérez trabajando en su laptop en una oficina" width="800" height="800"></div>
       <div class="chip-g k">
         <svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M2 26 L12 22 L20 24 L30 15 L38 17 L52 4" fill="none" stroke="#6A9DDB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="4" r="3" fill="#6A9DDB"/></svg>
-        <div><span class="big">+54%</span><small>primas emitidas<br>piloto MAPFRE</small></div>
+        <div><span class="big" data-count="54" data-pre="+" data-suf="%">+54%</span><small>primas emitidas<br>piloto MAPFRE</small></div>
       </div>
       <div class="chip-g t"><span class="mono">Stack</span><b>Power BI · R · VBA</b></div>
     </div>
@@ -391,8 +422,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 </header>
 
 <div class="tools-band" aria-label="Herramientas">
-  <div class="wrap">
-    <span>POWER BI</span><span>EXCEL</span><span>VBA</span><span>R</span><span>PYTHON</span><span>STATA</span><span>SQL</span><span>N8N</span>
+  <div class="wrap marq"><div class="marq-track">
+    <span>POWER BI</span><span>EXCEL</span><span>VBA</span><span>R</span><span>PYTHON</span><span>STATA</span><span>SQL</span><span>N8N</span></div>
   </div>
 </div>
 
@@ -421,8 +452,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           <p>Estudio el 8.º semestre de Administración Financiera y Sistemas en CUCEA y trabajo en el área comercial de MAPFRE, donde analizo información de ventas, automatizo reportes y construyo los tableros que usan los equipos de la región.</p>
           <p class="muted">Combino la parte financiera (presupuestos, punto de equilibrio, razones financieras, valuación) con econometría y machine learning. Me gusta encontrar dónde se pierde tiempo en un proceso, automatizarlo y entregar la información en un formato que cualquiera del equipo pueda leer.</p>
           <div class="stats">
-            <div><b>2+</b><span>años de experiencia profesional</span></div>
-            <div><b>3</b><span>cursos de econometría</span></div>
+            <div><b data-count="2" data-suf="+">2+</b><span>años de experiencia profesional</span></div>
+            <div><b data-count="3">3</b><span>cursos de econometría</span></div>
           </div>
         </div>
       </div>
@@ -458,8 +489,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
             </ul>
           </div>
           <div class="kpis">
-            <div class="kpi"><b class="up">+54%</b><span>primas emitidas en la muestra del piloto</span></div>
-            <div class="kpi"><b>480</b><span>agentes en el programa</span></div>
+            <div class="kpi"><b class="up" data-count="54" data-pre="+" data-suf="%">+54%</b><span>primas emitidas en la muestra del piloto</span></div>
+            <div class="kpi"><b data-count="480">480</b><span>agentes en el programa</span></div>
             <div class="kpi" style="display:flex;flex-direction:column;gap:10px">
               <span>Reportes que genero</span>
               <div class="tags"><span class="tag">Previos de cancelación</span><span class="tag">Previos de renovación</span><span class="tag">Metas trimestrales</span><span class="tag">Incidencias de cobranza</span><span class="tag">Incentivos</span></div>
@@ -525,11 +556,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           <h3 style="font-size:1.5rem">Red neuronal NNARX y presupuesto maestro 2026</h3>
           <p>Pronóstico de las ventas diarias de una panificadora real con una red neuronal autorregresiva con variables exógenas, programada en R. El pronóstico alimenta el presupuesto maestro 2026.</p>
           <div class="spec">
-            <div><b>528</b><span>configuraciones evaluadas</span></div>
-            <div><b>12</b><span>modelos comparados</span></div>
+            <div><b data-count="528">528</b><span>configuraciones evaluadas</span></div>
+            <div><b data-count="12">12</b><span>modelos comparados</span></div>
             <div><b>3–7%</b><span>error mensual fuera de muestra</span></div>
-            <div><b>14</b><span>variables de entrada</span></div>
-            <div><b>1,000</b><span>trayectorias bootstrap</span></div>
+            <div><b data-count="14">14</b><span>variables de entrada</span></div>
+            <div><b data-count="1000">1,000</b><span>trayectorias bootstrap</span></div>
             <div><b>15 × 2</b><span>productos × canales</span></div>
           </div>
           <ul class="bul">
@@ -559,9 +590,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           <h3 style="font-size:1.5rem">Modelo financiero y punto de equilibrio de una panificadora</h3>
           <p>Modelo en Excel que va de la receta al estado de resultados: costeo por insumo, margen de contribución por canal y punto de equilibrio mensual, con selectores de mes, producto y canal.</p>
           <div class="spec">
-            <div><b>$13.6 M</b><span>ventas anuales modeladas</span></div>
-            <div><b>$3.5 M</b><span>utilidad operativa anual</span></div>
-            <div><b>15</b><span>productos costeados</span></div>
+            <div><b data-count="13.6" data-dec="1" data-pre="$" data-suf=" M">$13.6 M</b><span>ventas anuales modeladas</span></div>
+            <div><b data-count="3.5" data-dec="1" data-pre="$" data-suf=" M">$3.5 M</b><span>utilidad operativa anual</span></div>
+            <div><b data-count="15">15</b><span>productos costeados</span></div>
           </div>
           <ul class="bul">
             <li>Costo unitario por producto a partir de los gramos de cada insumo y la recontribución de merma.</li>
@@ -723,6 +754,85 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     });
   });
   var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav=document.querySelector('.nav'), prog=document.querySelector('.prog');
+
+  /* Barra de progreso y sombra del menú */
+  var ticking=false;
+  function onScroll(){var h=document.documentElement, max=h.scrollHeight-innerHeight;
+    if(prog)prog.style.setProperty('--p',max>0?Math.min(1,scrollY/max):0);
+    nav.classList.toggle('scrolled',scrollY>10);ticking=false;}
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+  onScroll();
+
+  /* Menú: marcar la sección visible */
+  if('IntersectionObserver' in window){
+    var links={};document.querySelectorAll('.nav ul a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+    var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      Object.keys(links).forEach(function(k){links[k].setAttribute('aria-current',k===e.target.id?'true':'false');});}});},{rootMargin:'-45% 0px -50% 0px'});
+    Object.keys(links).forEach(function(k){var sec=document.getElementById(k);if(sec)spy.observe(sec);});
+  }
+
+  if(reduce||!('IntersectionObserver' in window))return;
+  document.documentElement.classList.add('js-anim');
+
+  /* Asignar animaciones */
+  function mark(sel,cls,step,base){document.querySelectorAll(sel).forEach(function(el,i){
+    el.classList.add('rv');if(cls)cls.split(' ').forEach(function(c){el.classList.add(c);});
+    var d=(base||0)+(step?i*step:0);if(d)el.style.setProperty('--d',d+'s');});}
+  mark('.s-head');
+  mark('.ficha','l');mark('.about-txt','r',0,.1);
+  mark('.flow > div','',.1);
+  mark('.job','z');
+  document.querySelectorAll('.kpis').forEach(function(k){[].forEach.call(k.children,function(c,i){c.classList.add('rv');c.style.setProperty('--d',(.15+i*.12)+'s');});});
+  document.querySelectorAll('.gal').forEach(function(g){[].forEach.call(g.children,function(c,i){c.classList.add('rv','z');c.style.setProperty('--d',(i*.1)+'s');});});
+  document.querySelectorAll('.proj').forEach(function(p){
+    var rev=p.classList.contains('rev');
+    p.classList.add('rv','z');
+    var v=p.querySelector('.viewer'),t=p.querySelector('.proj-txt');
+    v.classList.add('rv',rev?'r':'l');v.style.setProperty('--d','.15s');
+    t.classList.add('rv',rev?'l':'r');t.style.setProperty('--d','.28s');
+    p.querySelectorAll('.spec > div').forEach(function(c,i){c.classList.add('rv');c.style.setProperty('--d',(.4+i*.07)+'s');});
+  });
+  mark('.stack > div','',.1);mark('.fx','',0,.3);
+  mark('.edu-main','l');mark('.certs','r',0,.1);
+  mark('.contact-grid > div:first-child','l');mark('.rows','r',0,.12);
+
+  /* Citas: aparecen palabra por palabra */
+  document.querySelectorAll('.quote p, .mini-q p').forEach(function(p){
+    var words=p.textContent.trim().split(/\s+/);
+    p.innerHTML=words.map(function(w,i){return '<span class="w" style="--i:'+i+'">'+w+'</span>';}).join(' ');
+    p.closest('figure').classList.add('words');
+  });
+
+  /* Contadores */
+  function fmt(v,el){var dec=+(el.dataset.dec||0);
+    var n=dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');
+    return (el.dataset.pre||'')+n+(el.dataset.suf||'');}
+  function count(el){if(el.dataset.done)return;el.dataset.done=1;
+    var to=parseFloat(el.dataset.count),t0=null,dur=1500;
+    function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=fmt(to*e,el);if(k<1)requestAnimationFrame(f);}
+    el.textContent=fmt(0,el);requestAnimationFrame(f);}
+
+  /* Observador */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+    var el=e.target;el.classList.add('in');io.unobserve(el);
+    el.querySelectorAll('[data-count]').forEach(function(c){setTimeout(function(){count(c);},300);});
+    if(el.dataset.count)count(el);
+    setTimeout(function(){el.style.setProperty('--d','0s');},1600);
+  });},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv, .words').forEach(function(el){io.observe(el);});
+  /* Contadores fuera de bloques animados (tarjeta del inicio) */
+  document.querySelectorAll('.hero [data-count]').forEach(function(c){c.textContent=fmt(0,c);setTimeout(function(){count(c);},800);});
+
+  /* Carrusel de herramientas: duplicar para el ciclo continuo */
+  var tr=document.querySelector('.marq-track');
+  if(tr){var n=tr.children.length;tr.insertAdjacentHTML('beforeend',tr.innerHTML);
+    [].slice.call(tr.children,n).forEach(function(c){c.setAttribute('aria-hidden','true');});}
 })();
 </script>
 </body>
