@@ -170,15 +170,14 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .kpi span{font-size:13px;color:var(--plata)}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .tag{font-family:var(--f-mono);font-size:11.5px;padding:5px 10px;border-radius:8px;background:var(--abismo);border:1px solid var(--borde);color:var(--bruma)}
-.steps{list-style:none;margin:0;padding:28px 36px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;border-top:1px solid var(--borde);background:rgba(8,17,31,.35);position:relative}
-.steps li{position:relative;min-width:0;padding-top:26px}
-.steps li::before{content:"";position:absolute;left:0;top:4px;width:12px;height:12px;border-radius:50%;background:var(--abismo);border:2px solid var(--azul)}
-.steps li::after{content:"";position:absolute;left:16px;right:-8px;top:9px;height:2px;background:linear-gradient(90deg,var(--azul-hondo),var(--borde))}
-.steps li:last-child::after{display:none}
-.steps b{display:block;font-family:var(--f-display);font-weight:600;font-size:13.5px;color:var(--hielo);line-height:1.3}
-.steps span{display:block;font-size:12.5px;color:var(--plata);line-height:1.4;margin-top:3px}
-.steps-h{padding:28px 36px 0;border-top:1px solid var(--borde);background:rgba(8,17,31,.35)}
-.steps-h + .steps{border-top:0}
+.quote{margin:0;padding:40px 36px;border-top:1px solid var(--borde);background:rgba(8,17,31,.35);display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:24px;row-gap:18px}
+.quote::before{content:"\201C";font-family:var(--f-display);font-weight:800;font-size:5.5rem;line-height:.75;color:var(--azul);grid-row:span 2}
+.quote blockquote{margin:0}
+.quote p{margin:0;font-family:var(--f-display);font-weight:600;font-size:clamp(1.15rem,2.1vw,1.6rem);line-height:1.42;letter-spacing:-.01em;color:var(--hielo);max-width:48ch;text-wrap:balance}
+.quote figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:14px;color:var(--plata)}
+.quote figcaption::before{content:"";width:28px;height:2px;background:var(--azul)}
+.quote figcaption b{font-family:var(--f-display);font-weight:600;color:var(--hielo)}
+.quote cite{font-style:italic}
 .gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 36px 36px;background:rgba(8,17,31,.35)}
 .shot{position:relative;padding:0;border:1px solid var(--borde);border-radius:14px;overflow:hidden;background:var(--abismo);cursor:zoom-in;text-align:left;display:flex;flex-direction:column;min-width:0}
 .shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;transition:transform .35s}
@@ -292,8 +291,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
   .job-top{grid-template-columns:minmax(0,1fr);gap:24px}
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}
-  .steps li:nth-child(3)::after{display:none}
   .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
   .proj,.proj.rev{grid-template-columns:minmax(0,1fr)}
   .proj.rev .viewer{order:0;border-left:0}
@@ -314,9 +311,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .hero-act .div{display:none}
   .kpis{grid-template-columns:minmax(0,1fr)}
   .job-top,.proj-txt{padding:24px}
-  .steps{grid-template-columns:repeat(2,minmax(0,1fr));padding:24px;row-gap:20px}
-  .steps li::after{display:none}
-  .steps-h{padding:24px 24px 0}
+  .quote{padding:28px 24px;column-gap:12px}
+  .quote::before{font-size:3.6rem}
   .gal{padding:0 24px 24px;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .shot span{font-size:11.5px;padding:8px 10px}
   .viewer{padding:16px}
@@ -464,15 +460,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           </div>
         </div>
 
-        <div class="steps-h"><span class="course">Cómo se construyó el piloto</span></div>
-        <ol class="steps">
-          <li><b>Encuesta</b><span>Diagnóstico del universo de agentes</span></li>
-          <li><b>Kick off</b><span>Lanzamiento con incentivo</span></li>
-          <li><b>Sistema V1</b><span>2 etapas de contacto</span></li>
-          <li><b>Sistema V2</b><span>Contacto + datos y resultados</span></li>
-          <li><b>Prueba del modelo</b><span>3 oleadas</span></li>
-          <li><b>Dashboards</b><span>Medición de impacto</span></li>
-        </ol>
+        <figure class="quote">
+          <blockquote><p>La capacidad de tomar datos, entenderlos, procesarlos, extraerles valor, visualizarlos y comunicarlos, será una habilidad enormemente importante en las próximas décadas.</p></blockquote>
+          <figcaption><b>Hal Varian</b><span>Economista en jefe de Google · <cite>McKinsey Quarterly</cite>, 2009</span></figcaption>
+        </figure>
 
         <div class="gal" data-group="mapfre">
           <button class="shot" type="button" data-src="assets/img/mapfre-piloto.jpg" data-cap="Mapa del piloto: universo, oleadas, etapas y KPIs de resultados."><img src="assets/img/mapfre-piloto.jpg" alt="Lámina 'Data y estadística' del piloto MAPFRE con etapas y KPIs"><span>Mapa del piloto y KPIs</span></button>
