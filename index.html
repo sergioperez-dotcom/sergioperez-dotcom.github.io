@@ -269,6 +269,36 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(111,211,154,0),0 0 10px #6FD39A}}
 .open-tags{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .open-tags li{padding:7px 14px;border-radius:999px;border:1px solid var(--borde);background:var(--vidrio);font-size:13.5px;font-weight:600;color:var(--hielo)}
+.contact-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.bell{margin:0;padding:20px 22px 18px;border-radius:20px;border:1px solid var(--borde);background:linear-gradient(170deg,rgba(26,63,117,.3),var(--pizarra) 55%)}
+.bell-h{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--plata)}
+.bell-h b{color:var(--azul);font-weight:500}
+.bell-h span:last-child{text-transform:none;letter-spacing:.04em}
+.bell svg{display:block;width:100%;height:auto;margin-top:8px}
+.bell p{margin:4px 0 0;font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--hielo)}
+.bell p em{font-style:normal;color:#6FD39A}
+.bell .bar{fill:var(--acero);opacity:.38;transform-box:fill-box;transform-origin:50% 100%;transition:transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.bell .band{fill:var(--azul);transition:opacity .8s ease var(--d,0s)}
+.bell .b3{opacity:.10}.bell .b2{opacity:.17}.bell .b1{opacity:.28}
+.bell .curve{fill:none;stroke:var(--azul);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke-dashoffset 1.8s cubic-bezier(.45,0,.2,1) .45s}
+.bell .axis{stroke:var(--acero);stroke-width:1}
+.bell .tick{fill:var(--plata);font-family:var(--f-mono);font-size:11px;transition:opacity .6s ease var(--d,0s)}
+.bell .pct{fill:var(--hielo);font-family:var(--f-display);font-weight:700;font-size:15px;transition:opacity .6s ease var(--d,0s)}
+.bell .pct.s{fill:var(--plata);font-size:11px;font-weight:600}
+.bell .vline{stroke:#6FD39A;stroke-width:1.5;stroke-dasharray:3 4}
+.bell .dot{fill:#6FD39A;stroke:var(--abismo);stroke-width:2}
+.bell .ring{fill:none;stroke:#6FD39A;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(.7);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.bell .tip rect{fill:var(--abismo);stroke:rgba(111,211,154,.55)}
+.bell .tip .t1{fill:var(--hielo);font-family:var(--f-display);font-weight:700;font-size:13px}
+.bell .tip .t2{fill:#6FD39A;font-family:var(--f-mono);font-size:11px}
+.bell .vline,.bell .tip{transition:opacity .5s ease}
+.bell .mk{transition:opacity .3s ease}
+.js-anim .bell:not(.play) .bar{transform:scaleY(0)}
+.js-anim .bell:not(.play) .band,.js-anim .bell:not(.play) .tick,.js-anim .bell:not(.play) .pct{opacity:0}
+.js-anim .bell:not(.play) .curve{stroke-dashoffset:var(--len,0)}
+.js-anim .bell:not(.play) .mk{opacity:0}
+.js-anim .bell:not(.landed) .vline,.js-anim .bell:not(.landed) .tip{opacity:0}
 .rows{border-radius:20px;border:1px solid var(--borde);background:var(--pizarra);overflow:hidden}
 .row{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 20px;border-top:1px solid var(--borde)}
 .row:first-child{border-top:0}
@@ -730,10 +760,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
           <li>Español · Inglés B2</li>
         </ul>
       </div>
-      <div class="rows">
-        <div class="row"><span class="k">Correo</span><span class="v" id="c-mail">sergio.perez1335@alumnos.udg.mx</span><button class="copy" type="button" data-target="c-mail">Copiar</button></div>
-        <div class="row"><span class="k">Teléfono</span><span class="v mono" id="c-tel">312 229 7677</span><button class="copy" type="button" data-target="c-tel">Copiar</button></div>
-        <div class="row"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez" target="_blank" rel="noopener">in/sergio-eduardo-perez-gonzalez ↗</a></span><button class="copy" type="button" data-copy="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez">Copiar</button></div>
+      <div class="contact-side">
+        <div class="rows">
+          <div class="row"><span class="k">Correo</span><span class="v" id="c-mail">sergio.perez1335@alumnos.udg.mx</span><button class="copy" type="button" data-target="c-mail">Copiar</button></div>
+          <div class="row"><span class="k">Teléfono</span><span class="v mono" id="c-tel">312 229 7677</span><button class="copy" type="button" data-target="c-tel">Copiar</button></div>
+          <div class="row"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez" target="_blank" rel="noopener">in/sergio-eduardo-perez-gonzalez ↗</a></span><button class="copy" type="button" data-copy="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez">Copiar</button></div>
+        </div>
+        <figure class="bell" id="bell-card">
+          <figcaption class="bell-h"><span>Distribución de candidatos</span><span><b>μ</b> = 0 · <b>σ</b> = 1</span></figcaption>
+          <svg id="bell" viewBox="0 0 560 250" role="img" aria-label="Campana de Gauss con un marcador en más dos desviaciones estándar: Sergio en el percentil 97.7"></svg>
+          <p>Cuando busques talento, busca en la <em>cola derecha</em>.</p>
+        </figure>
       </div>
     </div>
   </section>
@@ -842,7 +879,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   });
   mark('.stack > div','',.1);mark('.ledger','',0,.3);
   mark('.edu-main','l');mark('.certs','r',0,.1);
-  mark('.contact-grid > div:first-child','l');mark('.rows','r',0,.12);
+  mark('.contact-grid > div:first-child','l');mark('.rows','r',0,.12);mark('.bell','r',0,.24);
 
   /* Citas: aparecen palabra por palabra */
   document.querySelectorAll('.quote p, .mini-q p').forEach(function(p){
@@ -875,6 +912,67 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   var tr=document.querySelector('.marq-track');
   if(tr){var n=tr.children.length;tr.insertAdjacentHTML('beforeend',tr.innerHTML);
     [].slice.call(tr.children,n).forEach(function(c){c.setAttribute('aria-hidden','true');});}
+})();
+</script>
+<script>
+(function(){
+  var svg=document.getElementById('bell'), card=document.getElementById('bell-card');
+  if(!svg||!card)return;
+  var NS='http://www.w3.org/2000/svg';
+  var L=24,R=536,T=16,B=196,X0=-3.5,X1=3.5,YM=0.43,TARGET=2;
+  var S=(svg.getBoundingClientRect().width||560)<440?1.35:1;
+  function fs(e,n){e.style.fontSize=(n*S)+'px';return e;}
+  function pdf(x){return Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);}
+  function px(x){return L+(R-L)*(x-X0)/(X1-X0);}
+  function py(y){return B-(B-T)*y/YM;}
+  function el(t,a,parent){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e;}
+  function areaPath(a,b){var d='M'+px(a).toFixed(1)+' '+B;for(var i=0;i<=60;i++){var x=a+(b-a)*i/60;d+=' L'+px(x).toFixed(1)+' '+py(pdf(x)).toFixed(1);}return d+' L'+px(b).toFixed(1)+' '+B+' Z';}
+
+  /* Histograma: muestra "observada" alrededor de la densidad */
+  var bins=28,w=(X1-X0)/bins,noise=[.94,1.05,.97,1.08,.92,1.03,1.06,.95,1.02,.98,1.07,.96,1.01,1.04,.97,1.03,.99,1.06,.95,1.02,1.05,.93,1.04,.98,1.07,.96,1.02,.97];
+  for(var i=0;i<bins;i++){var c=X0+w*(i+.5),h=pdf(c)*noise[i],x=px(X0+w*i)+1.5,y=py(h);
+    var r=el('rect',{x:x.toFixed(1),y:y.toFixed(1),width:(px(w)-px(0)-3).toFixed(1),height:(B-y).toFixed(1),rx:2,class:'bar'});
+    r.style.setProperty('--d',(Math.abs(c)*0.09).toFixed(2)+'s');}
+  /* Bandas de 1, 2 y 3 sigma */
+  [[3,'b3',1.9],[2,'b2',2.1],[1,'b1',2.3]].forEach(function(b){var p=el('path',{d:areaPath(-b[0],b[0]),class:'band '+b[1]});p.style.setProperty('--d',b[2]+'s');});
+  /* Eje y marcas */
+  el('line',{x1:L,x2:R,y1:B,y2:B,class:'axis'});
+  ['−3σ','−2σ','−σ','μ','+σ','+2σ','+3σ'].forEach(function(t,k){var x=k-3;
+    var tx=fs(el('text',{x:px(x).toFixed(1),y:B+14+6*S,'text-anchor':'middle',class:'tick'}),11);tx.textContent=t;tx.style.setProperty('--d',(1.2+k*.06)+'s');
+    el('line',{x1:px(x),x2:px(x),y1:B,y2:B+5,class:'axis'});});
+  var p1=fs(el('text',{x:px(0),y:py(.2),'text-anchor':'middle',class:'pct'}),15);p1.textContent='68.3%';p1.style.setProperty('--d','2.5s');
+  var p2=fs(el('text',{x:px(-1.5),y:B-12,'text-anchor':'middle',class:'pct s'}),11);p2.textContent='13.6%';p2.style.setProperty('--d','2.6s');
+  var p3=fs(el('text',{x:px(1.5),y:B-12,'text-anchor':'middle',class:'pct s'}),11);p3.textContent='13.6%';p3.style.setProperty('--d','2.6s');
+  /* Curva */
+  var d='';for(i=0;i<=200;i++){var xx=X0+(X1-X0)*i/200;d+=(i?' L':'M')+px(xx).toFixed(1)+' '+py(pdf(xx)).toFixed(1);}
+  var curve=el('path',{d:d,class:'curve'});
+  var len=curve.getTotalLength?curve.getTotalLength():1200;
+  curve.style.strokeDasharray=len;curve.style.setProperty('--len',len);
+  /* Marcador en +2σ */
+  var tx=px(TARGET),ty=py(pdf(TARGET));
+  var bw=164*S,bh=46*S,bx=R-bw,by=S>1?2:40;
+  el('line',{x1:tx,x2:tx,y1:by+bh,y2:B,class:'vline'});
+  var tip=el('g',{class:'tip'});
+  el('rect',{x:bx,y:by,width:bw,height:bh,rx:10},tip);
+  var t1=fs(el('text',{x:bx+14*S,y:by+20*S,class:'t1'},tip),13);t1.textContent='Sergio Pérez';
+  var t2=fs(el('text',{x:bx+14*S,y:by+36*S,class:'t2'},tip),11);t2.textContent='+2σ · percentil 97.7';
+  var mk=el('g',{class:'mk'});
+  el('circle',{cx:0,cy:0,r:7*S,class:'ring'},mk);el('circle',{cx:0,cy:0,r:6*S,class:'dot'},mk);
+  function place(x){mk.setAttribute('transform','translate('+px(x).toFixed(1)+' '+py(pdf(x)).toFixed(1)+')');}
+  place(TARGET);
+
+  /* Animación al entrar en pantalla */
+  if(!document.documentElement.classList.contains('js-anim'))return;
+  place(-3.2);
+  var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();
+    setTimeout(function(){card.classList.add('play');
+      setTimeout(function(){var t0=null,dur=1700;
+        function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/dur),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;place(-3.2+(TARGET+3.2)*e);
+          if(k<1)requestAnimationFrame(f);else card.classList.add('landed');}
+        requestAnimationFrame(f);},2600);
+    },250);
+  },{threshold:.35});
+  io.observe(card);
 })();
 </script>
 </body>
