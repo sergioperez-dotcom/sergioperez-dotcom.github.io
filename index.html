@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sergio Pérez González</title>
+<meta name="description" content="Portafolio de Sergio Eduardo Pérez González, Analista de Negocios y BI en Guadalajara.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: terminal de análisis. Hero = nombre + gráfica de pronóstico con intervalo; cinta de KPIs propios; secciones sobre papel milimétrico. */
+:root{
+  /* Paleta "Pronóstico" — tema oscuro por defecto */
+  --tinta:#0A1220;        /* fondo */
+  --grafito:#101B2D;      /* paneles */
+  --reticula:#1E2D46;     /* líneas, bordes */
+  --niebla:#E6ECF5;       /* texto */
+  --acero:#8D9DB6;        /* texto secundario */
+  --senal:#3DD6C4;        /* acento principal: la serie, los datos */
+  --senal-suave:rgba(61,214,196,.12);
+  --intervalo:#F3B847;    /* acento secundario: bandas de confianza, highlights */
+  --intervalo-suave:rgba(243,184,71,.16);
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --maxw:1120px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --tinta:#F3F6FA; --grafito:#FFFFFF; --reticula:#D9E1EC; --niebla:#0D1626; --acero:#53637C;
+    --senal:#0A8C7E; --senal-suave:rgba(10,140,126,.10); --intervalo:#B06F0E; --intervalo-suave:rgba(176,111,14,.14);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --tinta:#F3F6FA; --grafito:#FFFFFF; --reticula:#D9E1EC; --niebla:#0D1626; --acero:#53637C;
+  --senal:#0A8C7E; --senal-suave:rgba(10,140,126,.10); --intervalo:#B06F0E; --intervalo-suave:rgba(176,111,14,.14);
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--tinta);color:var(--niebla);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--tinta)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--senal);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--tinta) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--reticula)}
+.nav .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.mark svg{display:block}
+.mark span{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--acero)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.l{display:block;padding:6px 10px;border-radius:6px;font-size:14px;color:var(--acero);text-decoration:none;white-space:nowrap}
+.nav a.l:hover{color:var(--niebla);background:var(--senal-suave)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;border-bottom:1px solid var(--reticula);
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--reticula) 45%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--reticula) 45%,transparent) 1px,transparent 1px);
+  background-size:32px 32px;background-position:-1px -1px}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 20% 30%,transparent 30%,var(--tinta) 85%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:72px 64px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--senal);display:flex;align-items:center;gap:10px;margin:0 0 20px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--senal);box-shadow:0 0 0 4px var(--senal-suave)}
+h1{font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:.95;letter-spacing:-.025em;margin:0;text-wrap:balance}
+h1 .ap{display:block;color:var(--acero);font-weight:500;font-stretch:100%}
+.role{font-family:var(--f-display);font-stretch:100%;font-weight:600;font-size:clamp(1.05rem,1.8vw,1.25rem);margin:22px 0 0;color:var(--niebla)}
+.role b{color:var(--intervalo);font-weight:600}
+.thesis{color:var(--acero);font-size:1.075rem;max-width:52ch;margin:14px 0 0}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--reticula);background:var(--grafito);color:var(--niebla);transition:border-color .15s,transform .15s}
+.btn:hover{border-color:var(--senal);transform:translateY(-1px)}
+.btn.p{background:var(--senal);color:var(--tinta);border-color:var(--senal)}
+.btn svg{width:16px;height:16px}
+
+/* chart card */
+.term{background:var(--grafito);border:1px solid var(--reticula);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(0,0,0,.55)}
+.term-h{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--reticula);font-family:var(--f-mono);font-size:12px;color:var(--acero)}
+.term-h i{width:9px;height:9px;border-radius:50%;background:var(--reticula)}
+.term-h .t{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.term-h .live{margin-left:auto;color:var(--senal);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.term-h .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--senal);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.chart{padding:14px 10px 4px}
+.chart svg{display:block;width:100%;height:auto}
+.ax{fill:var(--acero);font-family:var(--f-mono);font-size:10px}
+.gl{stroke:var(--reticula);stroke-width:1}
+.hist{fill:none;stroke:var(--senal);stroke-width:1.8;stroke-linejoin:round}
+.histfill{fill:var(--senal-suave)}
+.fc{fill:none;stroke:var(--intervalo);stroke-width:1.8;stroke-dasharray:4 3}
+.band{fill:var(--intervalo-suave)}
+.today{stroke:var(--acero);stroke-dasharray:2 3}
+.endpt{fill:var(--intervalo)}
+.endring{fill:none;stroke:var(--intervalo);opacity:.5}
+.lg{display:flex;flex-wrap:wrap;gap:6px 16px;padding:0 14px 12px;font-family:var(--f-mono);font-size:11px;color:var(--acero)}
+.lg span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:3px;border-radius:2px;display:inline-block}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--reticula)}
+.stats div{padding:12px 14px;border-left:1px solid var(--reticula)}
+.stats div:first-child{border-left:0}
+.stats dt{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--acero)}
+.stats dd{margin:2px 0 0;font-family:var(--f-display);font-stretch:110%;font-weight:700;font-size:1.25rem;font-variant-numeric:tabular-nums}
+
+/* ---------- Ticker ---------- */
+.ticker{border-bottom:1px solid var(--reticula);background:var(--grafito);overflow:hidden;white-space:nowrap}
+.track{display:inline-flex;animation:tick 48s linear infinite}
+.ticker:hover .track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.tk{display:inline-flex;align-items:baseline;gap:10px;padding:12px 26px;border-right:1px solid var(--reticula);font-family:var(--f-mono);font-size:13px}
+.tk .k{color:var(--acero);letter-spacing:.06em}
+.tk .v{color:var(--niebla);font-weight:500;font-variant-numeric:tabular-nums}
+.tk .up{color:var(--senal)}
+.tk .d{color:var(--acero);font-family:var(--f-body);font-size:12px}
+
+/* ---------- Sections ---------- */
+section.s{padding-block:88px;border-bottom:1px solid var(--reticula)}
+.sh{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;margin-bottom:44px;align-items:end}
+.sh .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--senal)}
+h2{font-family:var(--f-display);font-stretch:112%;font-weight:750;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-stretch:105%;font-weight:700;font-size:1.25rem;line-height:1.2;margin:0;text-wrap:balance}
+.body-col{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px}
+.body-col > :first-child{min-width:0}
+.lead{font-size:1.125rem;max-width:62ch;margin:0}
+.p{color:var(--acero);max-width:64ch;margin:16px 0 0}
+
+/* about */
+.aside-meta{display:flex;flex-direction:column;gap:14px;font-size:14px}
+.aside-meta dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acero)}
+.aside-meta dd{margin:2px 0 0}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;border:1px solid var(--reticula);border-radius:12px;overflow:hidden;background:var(--grafito)}
+.pipe > div{padding:18px;border-left:1px solid var(--reticula);position:relative;min-width:0}
+.pipe > div:first-child{border-left:0}
+.pipe .n{font-family:var(--f-mono);font-size:11px;color:var(--senal)}
+.pipe h4{font-family:var(--f-display);font-weight:700;font-size:1.05rem;margin:6px 0 6px}
+.pipe p{margin:0;font-size:13.5px;color:var(--acero);line-height:1.5}
+.pipe > div:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:18px;width:16px;height:16px;line-height:16px;text-align:center;font-size:11px;background:var(--grafito);color:var(--acero);z-index:1}
+
+/* experience */
+.xp{display:flex;flex-direction:column;gap:0}
+.job{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;padding-block:32px;border-top:1px solid var(--reticula)}
+.job:first-child{border-top:0;padding-top:0}
+.when{font-family:var(--f-mono);font-size:13px;color:var(--acero)}
+.when .now{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:999px;background:var(--senal-suave);color:var(--senal);font-size:11px;letter-spacing:.06em}
+.job .org{color:var(--acero);font-size:14px;margin:4px 0 0}
+.kpi{display:flex;flex-wrap:wrap;gap:16px 36px;margin:22px 0 4px;padding:18px 20px;border:1px solid var(--reticula);border-radius:12px;background:var(--grafito)}
+.kpi div{min-width:0}
+.kpi b{display:block;font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.kpi b.up{color:var(--senal)}
+.kpi span{font-size:13px;color:var(--acero)}
+ul.bul{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:10px;max-width:70ch}
+ul.bul li{position:relative;padding-left:20px;color:var(--acero)}
+ul.bul li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:2px;background:var(--senal)}
+ul.bul li strong{color:var(--niebla);font-weight:600}
+.reports{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-family:var(--f-mono);font-size:11.5px;padding:4px 9px;border-radius:6px;border:1px solid var(--reticula);color:var(--acero);background:var(--tinta)}
+
+/* projects */
+.feat{border:1px solid var(--reticula);border-radius:16px;background:var(--grafito);overflow:hidden}
+.feat-top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:0}
+.feat-a{padding:32px;min-width:0}
+.feat-b{padding:32px;border-left:1px solid var(--reticula);background:color-mix(in srgb,var(--tinta) 55%,var(--grafito));min-width:0}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--intervalo)}
+.course{font-size:13px;color:var(--acero);margin:6px 0 0}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tools .chip{color:var(--niebla)}
+.spec{width:100%;border-collapse:collapse;font-size:14px}
+.spec td{padding:9px 0;border-bottom:1px dashed var(--reticula);vertical-align:baseline}
+.spec td:last-child{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--niebla);padding-left:12px;white-space:nowrap}
+.spec td:first-child{color:var(--acero)}
+.spec tr:last-child td{border-bottom:0}
+.tests{padding:22px 32px;border-top:1px solid var(--reticula);display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tests .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acero);margin-right:6px}
+.tests .chip{border-color:color-mix(in srgb,var(--senal) 40%,var(--reticula));color:var(--senal);background:transparent}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+.card{border:1px solid var(--reticula);border-radius:16px;padding:28px;background:var(--grafito);display:flex;flex-direction:column;min-width:0}
+.card ul.bul{margin-top:14px}
+.card .tools{margin-top:auto;padding-top:20px}
+.formula{margin-top:16px;padding:10px 12px;border-radius:8px;background:var(--tinta);border:1px solid var(--reticula);font-family:var(--f-mono);font-size:12.5px;color:var(--acero);overflow-x:auto;white-space:nowrap}
+.formula .fn{color:var(--senal)} .formula .s{color:var(--intervalo)}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.stack > div{min-width:0}
+.stack h4{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--acero);margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--reticula)}
+.stack ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.stack li{display:flex;justify-content:space-between;gap:10px;font-weight:500}
+.stack li em{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--acero);align-self:center}
+
+/* education */
+.edu{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
+.edu-main{border:1px solid var(--reticula);border-radius:16px;padding:28px;background:var(--grafito)}
+.edu-main .yrs{font-family:var(--f-mono);font-size:13px;color:var(--acero)}
+.edu-main h3{margin-top:8px}
+.sem{margin-top:22px}
+.sem-bar{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:8px}
+.sem-bar i{height:8px;border-radius:2px;background:var(--senal)}
+.sem-bar i:last-child{background:var(--intervalo)}
+.sem small{font-family:var(--f-mono);font-size:11px;color:var(--acero)}
+.eco{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.certs{display:flex;flex-direction:column;gap:0;border:1px solid var(--reticula);border-radius:16px;background:var(--grafito);overflow:hidden}
+.certs > div{padding:18px 22px;border-top:1px solid var(--reticula)}
+.certs > div:first-child{border-top:0}
+.certs b{display:block;font-weight:600}
+.certs span{font-size:13.5px;color:var(--acero)}
+
+/* contact */
+.contact{padding-block:96px 72px;position:relative}
+.contact h2{font-size:clamp(2.2rem,5.4vw,3.8rem);font-stretch:118%;font-weight:800;max-width:16ch}
+.contact h2 em{font-style:normal;color:var(--senal)}
+.cgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;margin-top:40px;align-items:start}
+.rows{display:flex;flex-direction:column;border:1px solid var(--reticula);border-radius:14px;background:var(--grafito);overflow:hidden}
+.row{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:12px;align-items:center;padding:16px 18px;border-top:1px solid var(--reticula)}
+.row:first-child{border-top:0}
+.row .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acero)}
+.row .v{font-weight:500;overflow-wrap:anywhere;user-select:all}
+.row .v a{text-decoration:none;user-select:auto}
+.row .v a:hover{color:var(--senal)}
+.copy{font-family:var(--f-mono);font-size:11.5px;padding:6px 10px;border-radius:6px;border:1px solid var(--reticula);background:var(--tinta);color:var(--acero);cursor:pointer;min-width:74px}
+.copy:hover{color:var(--niebla);border-color:var(--senal)}
+.copy.ok{color:var(--senal);border-color:var(--senal)}
+.avail{display:flex;flex-direction:column;gap:12px}
+.avail .st{display:flex;align-items:center;gap:10px;font-weight:500}
+.avail .st::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--senal);box-shadow:0 0 0 4px var(--senal-suave);flex-shrink:0}
+.avail p{color:var(--acero);margin:6px 0 0;max-width:42ch}
+footer{padding-block:28px;font-family:var(--f-mono);font-size:12px;color:var(--acero)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:920px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:40px;padding-block:52px 48px}
+  .sh,.body-col,.job{grid-template-columns:minmax(0,1fr);gap:14px}
+  .feat-top{grid-template-columns:minmax(0,1fr)}
+  .feat-b{border-left:0;border-top:1px solid var(--reticula)}
+  .stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
+  .edu,.cgrid{grid-template-columns:minmax(0,1fr)}
+  .pipe{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pipe > div:nth-child(3){border-left:0}
+  .pipe > div:nth-child(n+3){border-top:1px solid var(--reticula)}
+  .pipe > div::after{display:none}
+  .aside-meta{flex-direction:row;flex-wrap:wrap;gap:14px 28px}
+}
+@media (max-width:640px){
+  section.s{padding-block:64px}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .feat-a,.feat-b{padding:22px}
+  .tests{padding:18px 22px}
+  .card{padding:22px}
+  .pipe{grid-template-columns:minmax(0,1fr)}
+  .pipe > div{border-left:0;border-top:1px solid var(--reticula)}
+  .pipe > div:first-child{border-top:0}
+  .row{grid-template-columns:minmax(0,1fr) auto}
+  .row .k{grid-column:1/-1}
+  .mark span{display:none}
+  .stats dd{font-size:1.05rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track{animation:none}
+  .term-h .live::before{animation:none}
+  .btn{transition:none}
+}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Secciones">
+  <div class="wrap">
+    <a class="mark" href="#inicio" aria-label="Inicio">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="33" height="33" rx="8" fill="var(--grafito)" stroke="var(--reticula)"/>
+        <rect x="7" y="19" width="4" height="8" rx="1" fill="var(--acero)"/>
+        <rect x="13" y="14" width="4" height="13" rx="1" fill="var(--acero)"/>
+        <rect x="19" y="10" width="4" height="17" rx="1" fill="var(--senal)"/>
+        <path d="M7 15 L15 10 L21 7 L27 5" fill="none" stroke="var(--intervalo)" stroke-width="1.6" stroke-dasharray="2.5 2"/>
+      </svg>
+      <span>SEPG · BI</span>
+    </a>
+    <ul>
+      <li><a class="l" href="#perfil">Perfil</a></li>
+      <li><a class="l" href="#experiencia">Experiencia</a></li>
+      <li><a class="l" href="#proyectos">Proyectos</a></li>
+      <li><a class="l" href="#stack">Stack</a></li>
+      <li><a class="l" href="#formacion">Formación</a></li>
+      <li><a class="l" href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Guadalajara, Jalisco · MX</p>
+      <h1>Sergio Eduardo<span class="ap">Pérez González</span></h1>
+      <p class="role">Analista de Negocios y BI · <b>Data Analytics</b> · Finanzas</p>
+      <p class="thesis">Convierto datos comerciales y financieros en pronósticos, modelos y tableros que los equipos usan para decidir. Econometría para entender, automatización para escalar, BI para comunicar.</p>
+      <div class="ctas">
+        <a class="btn p" href="#proyectos">Ver proyectos</a>
+        <a class="btn" href="#contacto">Contacto</a>
+        <a class="btn" href="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-3.93v-11z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <figure class="term" aria-label="Ejemplo de pronóstico de ventas con intervalo de confianza" style="margin:0">
+      <div class="term-h"><i></i><i></i><i></i><span class="t">forecast_ventas.R — NNARX</span><span class="live">serie ilustrativa</span></div>
+      <div class="chart"><svg id="fc" viewBox="0 0 560 260" role="img" aria-label="Línea de ventas diarias históricas seguida de un pronóstico punteado con banda de confianza que se ensancha"></svg></div>
+      <div class="lg">
+        <span><i class="sw" style="background:var(--senal)"></i>Histórico diario</span>
+        <span><i class="sw" style="background:var(--intervalo)"></i>Pronóstico</span>
+        <span><i class="sw" style="background:var(--intervalo-suave);height:8px"></i>Banda bootstrap</span>
+      </div>
+      <dl class="stats">
+        <div><dt>Error mensual</dt><dd>3–7%</dd></div>
+        <div><dt>Arquitecturas</dt><dd>528</dd></div>
+        <div><dt>Trayectorias</dt><dd>1,000</dd></div>
+      </dl>
+    </figure>
+  </div>
+</header>
+
+<div class="ticker" aria-label="Indicadores destacados">
+  <div class="track" id="track">
+    <span class="tk"><span class="k">PRIMAS.EMIT</span><span class="v up">▲ 54%</span><span class="d">piloto de retención MAPFRE</span></span>
+    <span class="tk"><span class="k">AGENTES</span><span class="v">480</span><span class="d">región Occidente</span></span>
+    <span class="tk"><span class="k">MUESTRA</span><span class="v">≈144</span><span class="d">agentes evaluados</span></span>
+    <span class="tk"><span class="k">ARQ.NNARX</span><span class="v">528</span><span class="d">configuraciones probadas</span></span>
+    <span class="tk"><span class="k">MODELOS</span><span class="v">12</span><span class="d">comparados fuera de muestra</span></span>
+    <span class="tk"><span class="k">ERR.MENSUAL</span><span class="v up">3–7%</span><span class="d">modelo ganador</span></span>
+    <span class="tk"><span class="k">BOOTSTRAP</span><span class="v">1,000</span><span class="d">trayectorias simuladas</span></span>
+    <span class="tk"><span class="k">PPTO.2026</span><span class="v">15 × 2</span><span class="d">productos × canales</span></span>
+  </div>
+</div>
+
+<main>
+  <!-- PERFIL -->
+  <section class="s" id="perfil">
+    <div class="wrap">
+      <div class="sh"><span class="k">Perfil</span><h2>Visión financiera con oficio de datos.</h2></div>
+      <div class="body-col">
+        <dl class="aside-meta">
+          <div><dt>Base</dt><dd>Guadalajara, Jal.</dd></div>
+          <div><dt>Carrera</dt><dd>Adm. Financiera y Sistemas</dd></div>
+          <div><dt>Idiomas</dt><dd>Español nativo · Inglés B2</dd></div>
+        </dl>
+        <div>
+          <p class="lead">Soy estudiante de 8.º semestre de Administración Financiera y Sistemas en CUCEA, con experiencia real en análisis de información comercial, automatización de procesos y desarrollo de herramientas de inteligencia de negocios.</p>
+          <p class="p">Combino la parte financiera (presupuestos, punto de equilibrio, razones financieras, valuación) con modelos econométricos y de machine learning. Me gusta encontrar dónde se pierde tiempo en un proceso y automatizarlo, y entregar la información en un formato que cualquier persona del equipo pueda leer.</p>
+
+          <div class="pipe" role="list" aria-label="Cómo trabajo con los datos">
+            <div role="listitem"><span class="n mono">01 · Extraer</span><h4>Del CRM al modelo</h4><p>Power Query, SQL y consultas al CRM corporativo.</p></div>
+            <div role="listitem"><span class="n mono">02 · Depurar</span><h4>Datos confiables</h4><p>VBA y R para limpiar, consolidar y validar.</p></div>
+            <div role="listitem"><span class="n mono">03 · Modelar</span><h4>Econometría y ML</h4><p>ARIMA, SARIMAX, redes NNARX, simulación bootstrap.</p></div>
+            <div role="listitem"><span class="n mono">04 · Comunicar</span><h4>Tableros que se usan</h4><p>Power BI y Excel para equipos comerciales y directivos.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="s" id="experiencia">
+    <div class="wrap">
+      <div class="sh"><span class="k">Experiencia</span><h2>Dónde he aplicado esto.</h2></div>
+      <div class="xp">
+        <article class="job">
+          <div class="when">07/2025 – Actual<br><span class="now">EN CURSO</span></div>
+          <div>
+            <h3>Becario Comercial</h3>
+            <p class="org">MAPFRE · Guadalajara, Jalisco</p>
+            <div class="kpi">
+              <div><b class="up">+54%</b><span>primas emitidas en la muestra del piloto</span></div>
+              <div><b>480</b><span>agentes en el programa, región Occidente</span></div>
+              <div><b>≈144</b><span>agentes en la muestra evaluada</span></div>
+            </div>
+            <ul class="bul">
+              <li><strong>Piloto de retención de cartera de autos.</strong> Llevé el seguimiento, análisis estadístico y visualización del programa. La muestra registró un incremento cercano al 54% en primas emitidas, entre pólizas nuevas y renovaciones, y los resultados tuvieron repercusión a nivel nacional.</li>
+              <li><strong>Automatización con VBA.</strong> Procesos de extracción, depuración y análisis de datos del CRM corporativo convertidos en reportes recurrentes, con mucha menos intervención manual.</li>
+              <li><strong>Dashboards en Power BI y Excel</strong> usados a nivel territorial por analistas, asesores, coordinadores y jefes de zona para seguir primas emitidas y cobradas, cumplimiento presupuestal, ratios de conversión y variaciones.</li>
+              <li><strong>Reportes comerciales, administrativos y financieros</strong> a partir del CRM.</li>
+            </ul>
+            <div class="reports">
+              <span class="chip">Previos de Cancelación</span>
+              <span class="chip">Previos de Renovación</span>
+              <span class="chip">Metas Trimestrales</span>
+              <span class="chip">Incidencias de Cobranza</span>
+              <span class="chip">Estimación de utilidades · Incentivos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="when">01/2024 – 06/2025</div>
+          <div>
+            <h3>Consultor Administrativo</h3>
+            <p class="org">PyME de servicios · Guadalajara, Jalisco</p>
+            <ul class="bul">
+              <li>Llevé el control administrativo y financiero de ingresos y las estimaciones de ventas.</li>
+              <li>Apoyé la contabilidad e implementé mejoras en procesos, mercadotecnia y organización interna.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section class="s" id="proyectos">
+    <div class="wrap">
+      <div class="sh"><span class="k">Proyectos</span><h2>Del dato crudo al presupuesto.</h2></div>
+
+      <article class="feat">
+        <div class="feat-top">
+          <div class="feat-a">
+            <span class="tag">Pronóstico · Presupuesto maestro</span>
+            <h3 style="margin-top:10px;font-size:1.6rem">Redes neuronales y presupuesto maestro 2026</h3>
+            <p class="course">Software Aplicado a las Finanzas · CUCEA</p>
+            <ul class="bul">
+              <li>Red neuronal autorregresiva con variables exógenas <strong>(NNARX) en R</strong> para pronosticar las ventas diarias de una microempresa panificadora real.</li>
+              <li>Arquitectura elegida entre 528 configuraciones con validación cruzada temporal. Fue el modelo más preciso de 12 evaluados fuera de muestra.</li>
+              <li>El pronóstico se tradujo en un <strong>presupuesto maestro 2026</strong>: ventas, producción, costos y utilidad, con escenarios calibrados por simulación bootstrap.</li>
+              <li>Modelo financiero automatizado en Excel con selector de escenarios, y control de real contra presupuesto en Power BI.</li>
+            </ul>
+            <div class="tools"><span class="chip">R</span><span class="chip">Python</span><span class="chip">Excel</span><span class="chip">Power BI</span></div>
+          </div>
+          <div class="feat-b">
+            <span class="tag" style="color:var(--acero)">Ficha del modelo</span>
+            <table class="spec" style="margin-top:12px">
+              <tbody>
+                <tr><td>Datos históricos</td><td>313 días</td></tr>
+                <tr><td>Configuraciones probadas</td><td>528</td></tr>
+                <tr><td>Modelos comparados</td><td>12</td></tr>
+                <tr><td>Error mensual fuera de muestra</td><td>3% – 7%</td></tr>
+                <tr><td>Trayectorias bootstrap</td><td>1,000</td></tr>
+                <tr><td>Productos en presupuesto</td><td>15</td></tr>
+                <tr><td>Canales</td><td>2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tests">
+          <span class="lbl">Validación</span>
+          <span class="chip">ADF</span><span class="chip">KPSS</span><span class="chip">Teräsvirta</span><span class="chip">Ljung-Box</span><span class="chip">BDS</span><span class="chip">Diebold-Mariano</span>
+        </div>
+      </article>
+
+      <div class="grid2">
+        <article class="card">
+          <span class="tag">Series de tiempo · Rentabilidad</span>
+          <h3 style="margin-top:10px">Forecast de ventas y rentabilidad por canal</h3>
+          <p class="course">Software Aplicado a la Modelación Financiera · CUCEA</p>
+          <ul class="bul">
+            <li>Depuré y consolidé la información diaria de producción, ingresos, costos y gastos de dos canales: venta directa al público y distribución con repartidores.</li>
+            <li>Forecast por canal con <strong>ARIMA, SARIMA y SARIMAX</strong>, revisando autocorrelación, estacionalidad, tendencia, ruido blanco y el efecto de variables exógenas. Resultados en un dashboard dinámico de Power BI.</li>
+            <li>Control anual de la operación en Excel y punto de equilibrio mensual por producto y canal con margen de contribución ponderado.</li>
+          </ul>
+          <div class="formula" aria-label="Fórmula de ejemplo"><span class="fn">PE</span> = CF / <span class="fn">Σ</span>(MC<sub>i</sub> × <span class="s">part<sub>i</sub></span>)</div>
+          <div class="tools"><span class="chip">Python</span><span class="chip">R</span><span class="chip">Excel</span><span class="chip">Power BI</span></div>
+        </article>
+
+        <article class="card">
+          <span class="tag">Finanzas corporativas · Mercado</span>
+          <h3 style="margin-top:10px">Análisis financiero y pronóstico de ventas de una emisora de la BMV</h3>
+          <p class="course">Laboratorio Financiero · CUCEA</p>
+          <ul class="bul">
+            <li>Pronóstico de ventas con regresión lineal e interpretación de tendencias a partir de estados financieros y razones financieras.</li>
+            <li>Proyección de flujos de efectivo y capital de trabajo.</li>
+            <li>Evaluación de la estructura financiera y bursátil con <strong>WACC y CAPM</strong> para sustentar conclusiones sobre el desempeño de la emisora.</li>
+          </ul>
+          <div class="formula" aria-label="Fórmula de ejemplo"><span class="fn">k<sub>e</sub></span> = r<sub>f</sub> + <span class="s">β</span>(R<sub>m</sub> − r<sub>f</sub>)</div>
+          <div class="tools"><span class="chip">R</span><span class="chip">Excel</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="s" id="stack">
+    <div class="wrap">
+      <div class="sh"><span class="k">Stack</span><h2>Las herramientas del día a día.</h2></div>
+      <div class="stack">
+        <div>
+          <h4>BI y análisis de negocio</h4>
+          <ul><li>Power BI</li><li>Power Query</li><li>Power Pivot</li><li>Excel avanzado</li><li>Solver</li></ul>
+        </div>
+        <div>
+          <h4>Automatización</h4>
+          <ul><li>VBA</li><li>UserForms</li><li>Integración con Outlook</li><li>n8n</li></ul>
+        </div>
+        <div>
+          <h4>Estadística y datos</h4>
+          <ul><li>R</li><li>Python</li><li>Stata</li><li>SQL</li></ul>
+        </div>
+        <div>
+          <h4>Sistemas empresariales</h4>
+          <ul><li>CRM corporativo</li><li>CONTPAQi</li><li>Office 365</li></ul>
+        </div>
+      </div>
+      <div class="formula" style="margin-top:36px" aria-label="Ejemplo de fórmula de Excel">
+        <span class="fn">=FILTRAR</span>(tblPrimas, (tblPrimas[Zona]=<span class="s">"Occidente"</span>) * (tblPrimas[Var%]&gt;0))  <span style="opacity:.6">· BUSCARX · INDIRECTO · LET · LAMBDA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN -->
+  <section class="s" id="formacion">
+    <div class="wrap">
+      <div class="sh"><span class="k">Formación</span><h2>Base académica y certificaciones.</h2></div>
+      <div class="edu">
+        <div class="edu-main">
+          <span class="yrs">01/2023 – Actual</span>
+          <h3>Lic. en Administración Financiera y Sistemas</h3>
+          <p class="course" style="font-size:14px">Universidad de Guadalajara · CUCEA</p>
+          <div class="sem">
+            <small>AVANCE · 8.º SEMESTRE</small>
+            <div class="sem-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <p class="p" style="margin-top:20px;font-size:14.5px">Formación complementaria en econometría: modelos de regresión, series de tiempo y pruebas de diagnóstico.</p>
+          <div class="eco"><span class="chip">Econometría I</span><span class="chip">Econometría II</span><span class="chip">Econometría III</span></div>
+        </div>
+        <div class="certs">
+          <div><b>Introducción a la Ciencia de Datos</b><span>Santander Open Academy / IE University</span></div>
+          <div><b>Visual Basic for Applications</b><span>Universidad de Guadalajara</span></div>
+          <div><b>Inglés B2</b><span>Constancia TOEFL · Universidad de Guadalajara</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>Contacto</span>
+      <h2>¿Tienes datos que nadie está <em>leyendo</em>? Hablemos.</h2>
+      <div class="cgrid">
+        <div class="rows">
+          <div class="row"><span class="k">Correo</span><span class="v" id="c-mail">sergio.perez1335@alumnos.udg.mx</span><button class="copy" type="button" id="cp-mail" data-target="c-mail">Copiar</button></div>
+          <div class="row"><span class="k">Teléfono</span><span class="v mono" id="c-tel">312 229 7677</span><button class="copy" type="button" id="cp-tel" data-target="c-tel">Copiar</button></div>
+          <div class="row"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez" target="_blank" rel="noopener" id="c-li">in/sergio-eduardo-perez-gonzalez ↗</a></span><button class="copy" type="button" id="cp-li" data-copy="https://www.linkedin.com/in/sergio-eduardo-perez-gonzalez">Copiar</button></div>
+        </div>
+        <div class="avail">
+          <span class="st">Disponible para tiempo completo</span>
+          <span class="st">Guadalajara y zona metropolitana</span>
+          <p>Busco roles de Analista Financiero, Analista de Negocios / BI o Data Analytics. Respondo en español o inglés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© <span id="yr">2026</span> Sergio Eduardo Pérez González</span><span>Guadalajara, Jalisco · MX</span></div>
+</footer>
+
+<script>
+(function(){
+  /* ---- Gráfica de pronóstico (serie ilustrativa, generada con semilla fija) ---- */
+  var svg=document.getElementById('fc'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  var seed=7; function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+  var H=72, F=28, hist=[], fc=[], lo=[], hi=[];
+  var week=[0.86,0.92,0.95,1.0,1.08,1.22,1.12];
+  for(var i=0;i<H+F;i++){
+    var base=(100+i*0.18)*week[i%7];
+    if(i<H){hist.push(base+(rnd()-0.5)*9);}
+    else{var h=i-H+1; fc.push(base); var w=3.5+h*0.42; lo.push(base-w); hi.push(base+w);}
+  }
+  var all=hist.concat(lo,hi), mn=Math.min.apply(null,all), mx=Math.max.apply(null,all);
+  var yMin=Math.floor((mn-4)/20)*20, yMax=Math.ceil((mx+4)/20)*20;
+  var L=36,R=548,T=14,B=228, n=H+F;
+  function x(i){return L+(R-L)*i/(n-1);} function y(v){return B-(B-T)*(v-yMin)/(yMax-yMin);}
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+  for(var v=yMin;v<=yMax;v+=20){el('line',{x1:L,x2:R,y1:y(v),y2:y(v),class:'gl'});var t=el('text',{x:L-8,y:y(v)+3,'text-anchor':'end',class:'ax'});t.textContent=v;}
+  var d='M'+x(0)+' '+y(hist[0]); for(i=1;i<H;i++) d+=' L'+x(i).toFixed(1)+' '+y(hist[i]).toFixed(1);
+  el('path',{d:d+' L'+x(H-1)+' '+B+' L'+x(0)+' '+B+' Z',class:'histfill'});
+  var bd='M'+x(H-1)+' '+y(hist[H-1]); for(i=0;i<F;i++) bd+=' L'+x(H+i).toFixed(1)+' '+y(hi[i]).toFixed(1);
+  for(i=F-1;i>=0;i--) bd+=' L'+x(H+i).toFixed(1)+' '+y(lo[i]).toFixed(1); bd+=' Z';
+  el('path',{d:bd,class:'band'});
+  el('path',{d:d,class:'hist'});
+  var fd='M'+x(H-1)+' '+y(hist[H-1]); for(i=0;i<F;i++) fd+=' L'+x(H+i).toFixed(1)+' '+y(fc[i]).toFixed(1);
+  el('path',{d:fd,class:'fc'});
+  el('line',{x1:x(H-1),x2:x(H-1),y1:T,y2:B,class:'today'});
+  var lx=el('text',{x:x(H-1)-6,y:T+10,'text-anchor':'end',class:'ax'}); lx.textContent='Histórico';
+  var rx=el('text',{x:x(H-1)+6,y:T+10,class:'ax'}); rx.textContent='Pronóstico';
+  var ex=x(n-1), ey=y(fc[F-1]);
+  el('circle',{cx:ex,cy:ey,r:7,class:'endring'}); el('circle',{cx:ex,cy:ey,r:3.5,class:'endpt'});
+  [['Sem 1',0],['Sem 5',28],['Sem 10',63],['Sem 14',n-1]].forEach(function(p){
+    var t=el('text',{x:x(p[1]),y:B+18,'text-anchor':p[1]===0?'start':(p[1]===n-1?'end':'middle'),class:'ax'}); t.textContent=p[0];
+  });
+  var yl=el('text',{x:L,y:B+32,class:'ax'}); yl.textContent='Ventas diarias (índice)';
+
+  /* ---- Cinta de KPIs: duplicar para el loop ---- */
+  var tr=document.getElementById('track'); if(tr){ var c=tr.innerHTML; tr.insertAdjacentHTML('beforeend',c); Array.prototype.slice.call(tr.children,tr.children.length/2).forEach(function(n){n.setAttribute('aria-hidden','true');}); }
+
+  /* ---- Copiar contacto ---- */
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var txt=b.dataset.copy||document.getElementById(b.dataset.target).textContent.trim();
+      function done(ok){b.textContent=ok?'Copiado':'Selecciona';b.classList.toggle('ok',ok);setTimeout(function(){b.textContent='Copiar';b.classList.remove('ok');},1800);}
+      function fallback(){var t=b.dataset.target&&document.getElementById(b.dataset.target);if(t){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);}done(false);}
+      try{navigator.clipboard.writeText(txt).then(function(){done(true);},fallback);}catch(e){fallback();}
+    });
+  });
+  var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
