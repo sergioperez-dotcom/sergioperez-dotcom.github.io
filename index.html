@@ -253,16 +253,29 @@ ul.bul strong{color:var(--hielo);font-weight:600}
 .stack ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
 .stack li{color:var(--hielo);font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px}
 .stack li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--acero);flex-shrink:0}
-.ledger{margin-top:16px;padding:26px 28px 14px;border-radius:18px;border:1px solid var(--borde);background:var(--pizarra)}
-.ledger-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px;padding-bottom:12px;border-bottom:1px solid var(--borde)}
-.ledger-h h3{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--azul)}
-.ledger-h span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--plata)}
-.ledger dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:56px;margin:0}
-.ledger dl div{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-bottom:1px solid rgba(38,54,73,.7);min-width:0}
-.ledger dl div:nth-last-child(-n+2){border-bottom:0}
-.ledger dt{color:var(--hielo);font-weight:600;font-size:15px;min-width:0}
-.ledger i{flex:1;min-width:18px;border-bottom:2px dotted var(--acero);opacity:.7;transform:translateY(-5px)}
-.ledger dd{margin:0;font-family:var(--f-mono);font-size:12.5px;color:var(--plata);text-align:right;white-space:nowrap}
+
+.fin{margin-top:16px;padding:26px 28px 28px;border-radius:18px;border:1px solid var(--borde);background:var(--pizarra)}
+.fin-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px;padding-bottom:14px;border-bottom:1px solid var(--borde)}
+.fin-h h3{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--azul)}
+.fin-h span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--plata)}
+.fin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
+.fin-g{display:flex;flex-direction:column;gap:14px;padding:18px 16px 16px;border-radius:14px;background:var(--abismo);border:1px solid var(--borde);min-width:0;transition:border-color .3s ease}
+.fin-g:hover{border-color:var(--acero)}
+.fin-g h4{margin:0;display:flex;align-items:center;gap:9px;font-family:var(--f-display);font-weight:600;font-size:14.5px;color:var(--hielo)}
+.fin-g h4 i{width:9px;height:9px;border-radius:2px;background:var(--c);box-shadow:0 0 10px var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--f-body);font-weight:600;font-size:12.5px;line-height:1.3;padding:6px 11px;border-radius:999px;border:1px solid var(--borde);background:transparent;color:var(--bruma);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,translate .2s}
+.chip:hover{border-color:var(--acero);color:var(--hielo);translate:0 -1px}
+.chip[aria-pressed="true"]{background:color-mix(in srgb,var(--c) 22%,transparent);border-color:var(--c);color:var(--hielo)}
+.fin-d{position:relative;margin-top:auto;min-height:128px;padding:13px 14px 15px;border-radius:11px;background:var(--pizarra);border:1px solid var(--borde);overflow:hidden}
+.fin-d::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--c);transform-origin:0 50%;transform:scaleX(0);opacity:.8}
+.fin-g.tick .fin-d::after{animation:finbar 3.8s linear both}
+@keyframes finbar{to{transform:scaleX(1)}}
+.fd b{display:block;font-family:var(--f-display);font-weight:600;font-size:14px;color:var(--hielo)}
+.fd p{margin:4px 0 0;font-size:13px;line-height:1.5;color:var(--plata)}
+.fd code{display:block;margin-top:9px;padding:7px 9px;border-radius:7px;background:var(--abismo);font-family:var(--f-mono);font-size:11.5px;line-height:1.5;color:var(--c);overflow-wrap:anywhere}
+.fd.swap{animation:finin .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes finin{from{opacity:0;transform:translateY(8px)}}
 
 /* Formación */
 .edu{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
@@ -411,6 +424,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .proj.rev .viewer{order:0;border-left:0}
   .viewer{border-right:0;border-bottom:1px solid var(--borde)}
   .stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
   .nav .wrap{gap:12px}
@@ -439,11 +453,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .viewer{padding:16px}
   .spec{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stack{grid-template-columns:minmax(0,1fr)}
-  .ledger{padding:22px 20px 8px}
-  .ledger dl{grid-template-columns:minmax(0,1fr)}
-  .ledger dl div:nth-last-child(2){border-bottom:1px solid rgba(38,54,73,.7)}
-  .ledger dt{font-size:14px}
-  .ledger dd{font-size:11.5px}
+  .fin{padding:22px 16px 18px}
+  .fin-grid{grid-template-columns:minmax(0,1fr)}
+  .fin-d{min-height:0}
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .k{grid-column:1/-1}
   .marq-track{justify-content:flex-start}
@@ -739,18 +751,55 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
         <div><h3>Estadística y datos</h3><ul><li>R</li><li>Python</li><li>Stata</li><li>SQL</li></ul></div>
         <div><h3>Sistemas</h3><ul><li>CRM corporativo</li><li>CONTPAQi</li><li>Office 365</li></ul></div>
       </div>
-      <div class="ledger">
-        <div class="ledger-h"><h3>Finanzas</h3><span>En la práctica</span></div>
-        <dl>
-          <div><dt>Presupuesto maestro</dt><i></i><dd>Panificadora 2026</dd></div>
-          <div><dt>Punto de equilibrio</dt><i></i><dd>Por producto y canal</dd></div>
-          <div><dt>Margen de contribución</dt><i></i><dd>Ponderado por canal</dd></div>
-          <div><dt>Costeo unitario</dt><i></i><dd>Por insumo</dd></div>
-          <div><dt>Estados financieros</dt><i></i><dd>Vertical y horizontal</dd></div>
-          <div><dt>Razones de apalancamiento</dt><i></i><dd>Grupo México</dd></div>
-          <div><dt>Costo de capital</dt><i></i><dd>WACC · CAPM</dd></div>
-          <div><dt>Seguimiento presupuestal</dt><i></i><dd>Mapfre México</dd></div>
-        </dl>
+      <div class="fin" id="fin">
+        <div class="fin-h"><h3>Habilidades financieras</h3><span>Toca una para ver de qué se trata</span></div>
+        <div class="fin-grid">
+          <div class="fin-g" style="--c:#6A9DDB">
+            <h4><i></i>Estados financieros</h4>
+            <div class="chips" role="group" aria-label="Estados financieros">
+              <button type="button" class="chip" aria-pressed="true" data-d="Ventas menos costos y gastos: muestra la utilidad o pérdida del periodo." data-f="Utilidad neta = Ventas − Costos − Gastos − ISR">Estado de resultados</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Foto de la empresa en una fecha: lo que tiene, lo que debe y lo que aportaron los socios." data-f="Activo = Pasivo + Capital contable">Balance general</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Entradas y salidas de efectivo por actividades de operación, inversión y financiamiento." data-f="">Flujo de efectivo</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Elaboración e interpretación conjunta de resultados, situación financiera, flujo de efectivo y cambios en el capital contable." data-f="">Estados financieros básicos</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Revisión de registros y controles para confirmar que la información financiera es confiable." data-f="">Auditoría</button>
+            </div>
+            <div class="fin-d" aria-live="polite"><div class="fd"><b>Estado de resultados</b><p>Ventas menos costos y gastos: muestra la utilidad o pérdida del periodo.</p><code>Utilidad neta = Ventas − Costos − Gastos − ISR</code></div></div>
+          </div>
+          <div class="fin-g" style="--c:#6FD39A">
+            <h4><i></i>Análisis financiero</h4>
+            <div class="chips" role="group" aria-label="Análisis financiero">
+              <button type="button" class="chip" aria-pressed="true" data-d="Vertical: cada cuenta como porcentaje del total. Horizontal: cuánto cambió entre periodos." data-f="Var% = (Periodo 2 − Periodo 1) / Periodo 1">Análisis vertical y horizontal</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Capacidad de pagar las obligaciones de corto plazo." data-f="Razón circulante = Activo circulante / Pasivo circulante">Razones de liquidez</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Qué tanto se financia la empresa con deuda." data-f="Deuda / Capital  ·  Pasivo / Activo">Razones de apalancamiento</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Qué tan bien convierte la empresa sus recursos en utilidad." data-f="ROE = Utilidad neta / Capital  ·  ROA = Utilidad neta / Activo">Razones de rentabilidad</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Recursos de corto plazo disponibles para operar el día a día." data-f="CT = Activo circulante − Pasivo circulante">Capital de trabajo</button>
+            </div>
+            <div class="fin-d" aria-live="polite"><div class="fd"><b>Análisis vertical y horizontal</b><p>Vertical: cada cuenta como porcentaje del total. Horizontal: cuánto cambió entre periodos.</p><code>Var% = (Periodo 2 − Periodo 1) / Periodo 1</code></div></div>
+          </div>
+          <div class="fin-g" style="--c:#E8B04B">
+            <h4><i></i>Costos y presupuestos</h4>
+            <div class="chips" role="group" aria-label="Costos y presupuestos">
+              <button type="button" class="chip" aria-pressed="true" data-d="Costo de cada producto a partir de materia prima, mano de obra y gastos indirectos." data-f="Costo unitario = MP + MO + GIF">Costeo unitario</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Lo que aporta cada unidad vendida para cubrir los costos fijos." data-f="MC = Precio − Costo variable unitario">Margen de contribución</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Ventas mínimas para no ganar ni perder." data-f="PE (unidades) = Costos fijos / MC unitario">Punto de equilibrio</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Ventas, producción, costos y resultados integrados en un plan anual." data-f="">Presupuesto maestro</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Estados financieros pro forma a partir del pronóstico de ventas y sus escenarios." data-f="">Proyecciones financieras</button>
+            </div>
+            <div class="fin-d" aria-live="polite"><div class="fd"><b>Costeo unitario</b><p>Costo de cada producto a partir de materia prima, mano de obra y gastos indirectos.</p><code>Costo unitario = MP + MO + GIF</code></div></div>
+          </div>
+          <div class="fin-g" style="--c:#BFD6F2">
+            <h4><i></i>Valuación y costo de capital</h4>
+            <div class="chips" role="group" aria-label="Valuación y costo de capital">
+              <button type="button" class="chip" aria-pressed="true" data-d="Costo promedio ponderado de todas las fuentes de financiamiento." data-f="WACC = E/V · Ke + D/V · Kd · (1 − t)">WACC</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Rendimiento que exige el accionista según el riesgo de mercado." data-f="Ke = Rf + β · (Rm − Rf)">CAPM</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Costo del capital propio: lo que esperan ganar los accionistas." data-f="">Ke</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Costo de la deuda después de impuestos." data-f="Kd después de impuestos = Kd · (1 − t)">Kd</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Si un proyecto crea valor: VPN mayor a cero; TIR es la tasa donde el VPN vale cero." data-f="VPN = Σ FEt / (1 + k)^t − Inversión">VPN y TIR</button>
+              <button type="button" class="chip" aria-pressed="false" data-d="Valor de la empresa como el valor presente de sus flujos libres de efectivo." data-f="">Flujos descontados</button>
+            </div>
+            <div class="fin-d" aria-live="polite"><div class="fd"><b>WACC</b><p>Costo promedio ponderado de todas las fuentes de financiamiento.</p><code>WACC = E/V · Ke + D/V · Kd · (1 − t)</code></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -922,7 +971,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     t.classList.add('rv',rev?'l':'r');t.style.setProperty('--d','.28s');
     p.querySelectorAll('.spec > div').forEach(function(c,i){c.classList.add('rv');c.style.setProperty('--d',(.4+i*.07)+'s');});
   });
-  mark('.stack > div','',.1);mark('.ledger','',0,.3);
+  mark('.stack > div','',.1);mark('.fin-h','',0,.2);mark('.fin-g','',.1,.25);
   mark('.edu-main','l');mark('.certs','r',0,.1);
   mark('.contact-grid > div:first-child','l');mark('.rows','r',0,.12);mark('.bell','r',0,.24);
 
@@ -1064,6 +1113,29 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   var r=document.getElementById('hero-rot'),dots=document.getElementById('hero-dots'),k=0;
   if(r)setInterval(function(){r.classList.add('out');setTimeout(function(){k=(k+1)%stats.length;r.querySelector('b').textContent=stats[k][0];r.querySelector('span').textContent=stats[k][1];
     [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===k);});r.classList.remove('out');},350);},3200);
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var groups=[].slice.call(document.querySelectorAll('.fin-g'));
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function show(g,btn){
+    var chips=g.querySelectorAll('.chip');[].forEach.call(chips,function(c){c.setAttribute('aria-pressed',c===btn?'true':'false');});
+    var f=btn.getAttribute('data-f'),box=g.querySelector('.fin-d');
+    box.innerHTML='<div class="fd swap"><b>'+esc(btn.textContent)+'</b><p>'+esc(btn.getAttribute('data-d'))+'</p>'+(f?'<code>'+esc(f)+'</code>':'')+'</div>';
+  }
+  groups.forEach(function(g){
+    g.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){g.dataset.user='1';g.classList.remove('tick');stop(g);show(g,c);});});
+  });
+  if(reduce||!('IntersectionObserver' in window))return;
+  /* Recorrido automático mientras el bloque está en pantalla */
+  function step(g){var chips=g.querySelectorAll('.chip'),i=[].findIndex.call(chips,function(c){return c.getAttribute('aria-pressed')==='true';});
+    show(g,chips[(i+1)%chips.length]);g.classList.remove('tick');void g.offsetWidth;g.classList.add('tick');}
+  function start(g,delay){if(g.dataset.user||g._t)return;g._d=setTimeout(function(){g.classList.add('tick');g._t=setInterval(function(){step(g);},3800);},delay);}
+  function stop(g){clearTimeout(g._d);clearInterval(g._t);g._t=null;g.classList.remove('tick');}
+  var fin=document.getElementById('fin');
+  if(fin)new IntersectionObserver(function(es){es.forEach(function(e){groups.forEach(function(g,i){if(e.isIntersecting)start(g,600+i*950);else stop(g);});});},{threshold:.3}).observe(fin);
 })();
 </script>
 </body>
