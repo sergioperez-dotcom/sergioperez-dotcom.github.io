@@ -78,7 +78,8 @@ h3{font-weight:600;font-size:1.3rem;line-height:1.25;letter-spacing:-.01em}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(8,17,31,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,54,73,.6)}
 .nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;color:var(--hielo);letter-spacing:.04em;flex-shrink:0}
-.brand i{width:30px;height:30px;border-radius:8px;background:var(--azul-fuerte);display:grid;place-items:center;font-style:normal;font-size:17px;font-weight:700;letter-spacing:0;flex-shrink:0;box-shadow:0 6px 16px -6px rgba(47,100,177,.8)}
+.brand i{width:30px;height:30px;border-radius:8px;background:linear-gradient(150deg,#3A74C6,var(--azul-fuerte) 55%,var(--azul-hondo));display:block;font-style:normal;flex-shrink:0;box-shadow:0 6px 16px -6px rgba(47,100,177,.8);overflow:hidden}
+.brand i svg{display:block;width:100%;height:100%}
 .brand span{white-space:nowrap}
 .nav ul{display:flex;gap:2px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
 .nav ul::-webkit-scrollbar{display:none}
@@ -432,7 +433,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 
 <nav class="nav" aria-label="Secciones">
   <div class="wrap">
-    <a class="brand" href="#inicio" aria-label="Sergio Pérez González, ir al inicio"><i aria-hidden="true">$</i><span>SERGIO PÉREZ GONZÁLEZ</span></a>
+    <a class="brand" href="#inicio" aria-label="Sergio Pérez González, ir al inicio"><i aria-hidden="true"><svg id="logo-fc" viewBox="0 0 32 32"><defs><clipPath id="logo-clip"><rect x="0" y="0" width="0" height="32"><animate attributeName="width" values="0;32;32;32" keyTimes="0;.45;.9;1" dur="4.2s" repeatCount="indefinite"/></rect></clipPath></defs><line x1="3" y1="26.5" x2="29" y2="26.5" stroke="rgba(238,242,246,.42)" stroke-width=".8"/><g clip-path="url(#logo-clip)"><path d="M18 15.5 L28.5 5.5 L28.5 20 Z" fill="rgba(191,214,242,.32)"/><polyline points="3.5,22.5 7.5,18.5 10.5,20.5 14,14 18,15.5" fill="none" stroke="#EEF2F6" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><polyline points="18,15.5 23,11.5 28.5,9.5" fill="none" stroke="#BFD6F2" stroke-width="2" stroke-dasharray="2 2" stroke-linecap="round"/></g><circle cx="28.5" cy="9.5" r="2" fill="#6FD39A" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.42;.5;.9;1" dur="4.2s" repeatCount="indefinite"/></circle></svg></i><span>SERGIO PÉREZ GONZÁLEZ</span></a>
     <ul>
       <li><a href="#perfil">Perfil</a></li>
       <li><a href="#experiencia">Experiencia</a></li>
@@ -849,6 +850,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 <script>
 (function(){
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lg=document.getElementById('logo-fc');
+  if(reduce&&lg&&lg.pauseAnimations){lg.setCurrentTime(3);lg.pauseAnimations();}
   var nav=document.querySelector('.nav'), prog=document.querySelector('.prog');
 
   /* Barra de progreso y sombra del menú */
