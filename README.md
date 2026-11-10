@@ -1,4 +1,4 @@
-# Sergio Eduardo Pérez González
+# Sergio Pérez González
 
 Portafolio profesional · Analista de Negocios y BI · Guadalajara, Jalisco.
 
